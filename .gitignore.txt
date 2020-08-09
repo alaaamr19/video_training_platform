@@ -1,0 +1,19 @@
+Backend/node_modules
+Frontend/video-training/node_modules
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+Frontend/video-training/dist
+Frontend/video-training/tmp
+/out-tsc
+# Only exists if Bazel was run
+Frontend/video-training/bazel-out
+
+# dependencies
+./Frontend/video-training/node_modules
+
+# profiling files
+Frontend/video-training/chrome-profiler-events*.json
+Frontend/video-training/speed-measure-plugin*.json
+
+
