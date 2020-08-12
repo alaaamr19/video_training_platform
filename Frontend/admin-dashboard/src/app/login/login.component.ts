@@ -1,18 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-login',
-//   templateUrl: './login.component.html',
-//   styleUrls: ['./login.component.css']
-// })
-// export class LoginComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
@@ -50,8 +35,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value);
   }
 
-  registerInstead() {
-    this.router.navigate(['../register'], { relativeTo: this.activateRoute });
+  ngOnInit(): void {
+    if (this.authService.getToken) {
+      this.router.navigate(['/']);
+    }
   }
-  ngOnInit(): void {}
 }

@@ -1,1 +1,24 @@
-<p>add works!</p>
+<div class="col-md-6 m-auto">
+  <br />
+  <br />
+  <div *ngIf="message" class="alert alert-danger" role="alert">
+    {{ message }}
+  </div>
+  <div class="card card-header mt-5">
+    <h2 class="text-center">Add category</h2>
+  </div>
+  <div class="card card-body">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" [(ngModel)]="category.name" />
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" (click)="save()" [disabled]="isInValid()">
+        Add
+      </button>
+      <button class="btn btn-light" [routerLink]="['']">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

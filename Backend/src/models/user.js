@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bycrpt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-// const { delete } = require("../routers/user");
 const userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -45,6 +44,16 @@ const userSchema = mongoose.Schema({
       ref: "Course",
     },
   ],
+  finishedCourses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
+    },
+  ],
+  score: {
+    type: Number,
+    default: 0,
+  },
 });
 
 // Generate authentication token

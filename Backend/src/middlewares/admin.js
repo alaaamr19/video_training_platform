@@ -2,15 +2,9 @@ const User = require("../models/user");
 const getToken = require("../config/jwtConfig");
 
 const admin = async (req, res, next) => {
-  //   if (
-  //     req.body.email == "admin@admin.com" &&
-  //     request.body.password == "admin1234"
-  //   ) {
-  //     next();
-  //   }
   try {
     const tokenObj = getToken(req);
-    console.log(tokenObj);
+    // console.log(tokenObj);
     // console.log(decodedToken);
     const user = await User.findOne({
       _id: tokenObj.decodedtoken._id,

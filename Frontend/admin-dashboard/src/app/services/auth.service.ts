@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+// import { share } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   baseUrl = 'http://localhost:3000';
-
-  constructor(private http: HttpClient) {}
+  public isLogined = false;
+  constructor(private http: HttpClient, private roter: Router) {}
   register(data: any) {
     return this.http.post(this.baseUrl + '/users', data, {
       observe: 'body',
@@ -32,6 +33,8 @@ export class AuthService {
           (response: any) => {
             if (response.token) {
               this.setToken(response);
+              this.isLogined = true;
+              this.roter.navigate(['']);
             }
             // console.log(response), (error) => console.log(error);
           },
@@ -51,14 +54,19 @@ export class AuthService {
 
   getToken() {
     const userData = localStorage.getItem('user');
-    return JSON.parse(userData).token;
+    return JSON.parse(userData)?.token;
+  }
+
+  getUser() {
+    const userData = localStorage.getItem('user');
+    return JSON.parse(userData)?.user;
   }
 
   logout() {
     this.http.get(this.baseUrl + '/users/logout').subscribe((response: any) => {
-      if (response.status === 200) {
-        localStorage.removeItem('user');
-      }
+      localStorage.removeItem('user');
+      this.isLogined = false;
+      this.roter.navigate(['login']);
     });
   }
 }

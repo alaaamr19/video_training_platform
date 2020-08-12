@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("../models/user");
 const auth = require("../middlewares/auth");
+const admin = require("../middlewares/admin");
 
 const router = express.Router();
 
@@ -22,6 +23,28 @@ router.post("/users", async (req, res) => {
     res.json({ user: user.filterUserData(), token: token });
   } catch (error) {
     console.log("alaa");
+    res.json(400, error);
+  }
+});
+
+// Register new admin(admin only)
+router.post("/users/admin", admin, async (req, res) => {
+  let data = req.body;
+  const dataKeys = Object.keys(req.body);
+  const validterms = ["name", "email", "password"];
+
+  dataKeys.forEach((key) => {
+    if (!validterms.includes(key)) {
+      delete data[key];
+    }
+  });
+  data.isAdmin = true;
+  const user = new User(data);
+  try {
+    await user.save();
+    const token = await user.generateJWTtoken();
+    res.json({ user: user.filterUserData(), token: token });
+  } catch (error) {
     res.json(400, error);
   }
 });
@@ -78,9 +101,31 @@ router.get("/users/me", auth, async (req, res) => {
   }
 });
 
+// Delete certain user (admin only)
+router.delete("/users/:id", admin, async (req, res) => {
+  const _id = req.params.id;
+  try {
+    const user = await User.deleteOne({ _id: _id });
+    if (!user) {
+      res.status(404).send();
+    }
+    res.send(user);
+  } catch (error) {
+    res.status(500).send();
+  }
+});
+
+// Update profile
 router.patch("/users/me", auth, async (req, res) => {
   const updates = Object.keys(req.body);
-  const validUpdates = ["name", "email", "password"];
+  const validUpdates = [
+    "name",
+    "email",
+    "password",
+    "score",
+    "finishedCourses",
+    "courses",
+  ];
 
   const isValid = updates.every((key) => validUpdates.includes(key));
   if (!isValid) {

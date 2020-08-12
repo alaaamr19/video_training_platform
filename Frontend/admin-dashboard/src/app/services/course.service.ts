@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Course } from '../models/course';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -11,18 +11,26 @@ export class CourseService {
   baseUrl = 'http://localhost:3000';
   constructor(private httpClient: HttpClient) {}
   create(course: Course) {
+    console.log(course);
+
     return this.httpClient
-      .post(this.baseUrl + '/courses/', JSON.stringify(course), {
+      .post(this.baseUrl + '/courses/', course, {
         observe: 'body',
       })
       .pipe(catchError(this.errorHandler));
   }
-  getById(id) {
+  getById(id): Observable<any> {
     return this.httpClient
       .get(this.baseUrl + '/courses/' + id)
       .pipe(catchError(this.errorHandler));
   }
 
+  getByPage(page) {
+    // get page of items from api
+    return this.httpClient
+      .get(this.baseUrl + `/courses?page=${page}`)
+      .pipe(catchError(this.errorHandler));
+  }
   getAll() {
     return this.httpClient
       .get(this.baseUrl + '/courses/')
@@ -30,12 +38,15 @@ export class CourseService {
   }
 
   update(id, course) {
+    console.log('toto', course);
+
     return this.httpClient
-      .put(this.baseUrl + '/courses/' + id, JSON.stringify(course))
+      .put(this.baseUrl + '/courses/' + id, course)
       .pipe(catchError(this.errorHandler));
   }
 
   delete(id) {
+    console.log(id);
     return this.httpClient
       .delete(this.baseUrl + '/courses/' + id)
       .pipe(catchError(this.errorHandler));

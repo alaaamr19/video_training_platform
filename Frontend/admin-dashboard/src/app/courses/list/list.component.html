@@ -1,1 +1,119 @@
-<p>list works!</p>
+<div class="container mt-5">
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <h4 class="mt-3">All Courses</h4>
+      <div class="table-responsive">
+        <table id="mytable" class="table table-bordred table-striped">
+          <thead>
+            <th>Name</th>
+            <th>Points</th>
+            <th>Categories</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let course of courses">
+              <td>
+                <button
+                  class="btn btn-link btn-link-info"
+                  [routerLink]="['/courses/details', course._id]"
+                >
+                  {{ course.name }}
+                </button>
+              </td>
+              <td>{{ course.points }}</td>
+              <td class="row">
+                <span
+                  class="badge badge-light ml-1"
+                  *ngFor="let cat of course.categories"
+                  [routerLink]="['/categories/course', cat._id]"
+                  >{{ cat.name }}</span
+                >
+              </td>
+              <td>
+                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                  <button
+                    class="btn btn-primary btn-xs"
+                    [routerLink]="['/courses/update/', course._id]"
+                  >
+                    <span class="fa fa-pencil"></span>
+                  </button>
+                </p>
+              </td>
+              <td>
+                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                  <button
+                    class="btn btn-danger btn-xs"
+                    (click)="delete(course._id)"
+                  >
+                    <span class="fa fa-trash"></span>
+                  </button>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer pb-0 pt-3">
+    <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination pl-1">
+      <li
+        [ngClass]="{ disabled: pager?.currentPage === 1 }"
+        class="page-item first-item"
+      >
+        <a
+          [routerLink]="['/courses/list/']"
+          [queryParams]="{ page: 1 }"
+          class="page-link ml-1"
+          >First</a
+        >
+      </li>
+      <li
+        [ngClass]="{ disabled: pager?.currentPage === 1 }"
+        class="page-item previous-item ml-1"
+      >
+        <a
+          [routerLink]="['/courses/list/']"
+          [queryParams]="{ page: pager?.currentPage - 1 }"
+          class="page-link"
+          >Previous</a
+        >
+      </li>
+      <li
+        *ngFor="let page of pager.pages"
+        [ngClass]="{ active: pager?.currentPage === page }"
+        class="page-item number-item"
+      >
+        <a
+          [routerLink]="['/courses/list/']"
+          [queryParams]="{ page: page }"
+          class="page-link"
+          >{{ page }}</a
+        >
+      </li>
+      <li
+        [ngClass]="{ disabled: pager?.currentPage === pager?.totalPages }"
+        class="page-item next-item"
+      >
+        <a
+          [routerLink]="['/courses/list/']"
+          [queryParams]="{ page: pager?.currentPage + 1 }"
+          class="page-link"
+          >Next</a
+        >
+      </li>
+      <li
+        [ngClass]="{ disabled: pager?.currentPage === pager?.totalPages }"
+        class="page-item last-item"
+      >
+        <a
+          [routerLink]="['/courses/list/']"
+          [queryParams]="{ page: pager?.totalPages }"
+          class="page-link"
+          >Last</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>

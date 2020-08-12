@@ -1,1 +1,84 @@
-<p>add works!</p>
+<div class="col-md-6 m-auto">
+  <br />
+  <br />
+  <div *ngIf="message" class="alert alert-danger" role="alert">
+    {{ message }}
+  </div>
+  <div class="card card-body mt-5">
+    <h2 class="text-center">Add Course</h2>
+    <form [formGroup]="addCourseForm">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" formControlName="name" />
+        <span *ngIf="isInValid('name')" class="text-danger"
+          >Name is required</span
+        >
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <input type="text" class="form-control" formControlName="description" />
+      </div>
+      <div class="form-group">
+        <label>Points</label>
+        <input type="number" class="form-control" formControlName="points" />
+        <span *ngIf="isInValid('points')" class="text-danger">
+          Invalid entry</span
+        >
+      </div>
+      <div class="form-group">
+        <button
+          type="button"
+          class="btn btn-raised btn-raised-secondary"
+          data-toggle="modal"
+          data-target=".done-example-modal-signup"
+        >
+          Choose category
+        </button>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" (click)="add()">
+          Add
+        </button>
+        <button type="submit" class="btn btn-primary" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div
+  class="modal fade done-example-modal-signup"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content overflow-hidden">
+      <div class="modal-body p-0">
+        <div class="gray-200 px-xl pb-xxxl pt-xl">
+          <div class="text-center mb-md">
+            <small class="text-muted">Categories</small>
+          </div>
+          <div>
+            <div
+              *ngFor="let category of newCats"
+              class="mb-md custom-control custom-checkbox checkbox-primary mb-md"
+            >
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                [id]="category.name"
+                [(ngModel)]="category.checked"
+              />
+              <label class="custom-control-label" [for]="category.name">
+                {{ category.name }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

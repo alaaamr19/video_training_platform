@@ -1,6 +1,7 @@
 const express = require("express");
 const Category = require("../models/category");
 const admin = require("../middlewares/admin");
+const Course = require("../models/course");
 
 const router = express.Router();
 
@@ -11,6 +12,7 @@ router.post("/categories", admin, async (req, res) => {
     await category.save();
     res.status(201).send(category);
   } catch (error) {
+    console.log(error);
     res.status(400).send(error);
   }
 });
@@ -31,12 +33,16 @@ router.get("/categories/:id", async (req, res) => {
   const _id = req.params.id;
   try {
     const category = await Category.findById(_id);
-    await category.populate("courses");
-    if (!category) {
+    const courses = await Course.find({ categories: category }).populate(
+      "categories"
+    );
+    if (!courses) {
       res.status(404).send();
     }
-    res.send(category.courses);
+
+    res.json(courses);
   } catch (error) {
+    console.log(error);
     res.status(500).send(error);
   }
 });
@@ -70,7 +76,7 @@ router.patch("/categories/:id", admin, async (req, res) => {
 router.delete("/categories/:id", admin, async (req, res) => {
   const _id = req.params.id;
   try {
-    const category = await Category.findByIdAndUpdate(_id);
+    const category = await Category.deleteOne({ _id: _id });
     if (!category) {
       res.status(404).send();
     }

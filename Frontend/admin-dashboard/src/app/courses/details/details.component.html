@@ -1,0 +1,83 @@
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="row mt-5">
+    <div class="col-sm-12 col-md-10">
+      <div class="card mb-xxl">
+        <img
+          class="card-img-top"
+          src="./assets/images/photo-wide-1.jpg"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h3 class="card-title">{{ course?.name }}</h3>
+          <p class="card-text">
+            {{ course?.description }}
+          </p>
+          <div class="form-group">
+            <button
+              type="button"
+              class="btn btn-raised btn-raised-secondary"
+              data-toggle="modal"
+              data-target=".done-example-modal-signup"
+            >
+              Edit Categories
+            </button>
+          </div>
+          <div class="card-footer">
+            <span
+              class="badge badge-primary mr-2"
+              *ngFor="let cat of course?.categories"
+              [routerLink]="['/categories/course', cat?._id]"
+              >{{ cat?.name }}</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade done-example-modal-signup"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content overflow-hidden">
+      <div class="modal-body p-0">
+        <div class="gray-200 px-xl pb-xxxl pt-xl">
+          <div class="text-center mb-md">
+            <small class="text-muted">Categories</small>
+          </div>
+          <div>
+            <div
+              *ngFor="let category of newCats"
+              class="mb-md custom-control custom-checkbox checkbox-primary mb-md"
+            >
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                [id]="category.name"
+                [(ngModel)]="category.checked"
+              />
+              <label class="custom-control-label" [for]="category.name">
+                {{ category.name }}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-default"
+            data-dismiss="modal"
+            (click)="addCategories()"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
