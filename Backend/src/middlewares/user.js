@@ -8,7 +8,9 @@ const user = async (req, res, next) => {
       _id: tokenObj.decodedtoken._id,
       "tokens.token": tokenObj.token,
       isAdmin: false,
-    });
+    })
+      .populate("courses")
+      .populate("finishedCourses");
     if (!user) {
       throw new Error("Not Authenticated");
     }

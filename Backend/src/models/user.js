@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bycrpt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Course = require("./course");
 const userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -61,8 +62,20 @@ userSchema.methods.generateJWTtoken = async function () {
   const user = this;
   const token = jwt.sign({ _id: user.id.toString() }, "videoTraining");
   user.tokens = user.tokens.concat({ token });
+  // console.log(user);
   await user.save();
   return token;
+};
+
+// Calculate and user Score
+userSchema.methods.setScore = async function (courseId) {
+  const user = this;
+  let oldScore = user.score;
+  let course = await Course.findById(courseId);
+  let newScore = oldScore + course.points;
+  user.score = newScore;
+
+  await user.save();
 };
 
 // Check credentials for login

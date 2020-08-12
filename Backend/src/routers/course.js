@@ -13,14 +13,17 @@ router.post("/courses", admin, async (req, res) => {
   try {
     await course.save();
     const cats = req.body.categories;
-    for (i = 0; i < cats.length; i++) {
-      let cat = await Category.findById(cats[i]._id);
-      console.log(cat);
-      cat.addCourse(course);
+    if (cats) {
+      for (i = 0; i < cats.length; i++) {
+        let cat = await Category.findById(cats[i]._id);
+        console.log(cat);
+        // cat.addCourse(course);
+      }
     }
 
     res.status(201).send(course);
   } catch (error) {
+    console.log(error);
     res.status(400).send(error);
   }
 });
