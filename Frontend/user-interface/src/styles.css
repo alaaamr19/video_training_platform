@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/fonts/themify-icons.css";
+@import "./assets/vendor/bootstrap-select/css/bootstrap-select.min.css";
+@import "./assets/vendor/bootstrap-slider/css/bootstrap-slider.min.css";
+@import "./assets/styles/css/done/done.min.css";
+@import "./assets/vendor/bootstrap/css/bootstrap.min.css";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

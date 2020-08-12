@@ -1,0 +1,43 @@
+<nav
+  class="navbar navbar-expand-lg navbar-dark bg-primary shadow-4dp rounded mb-lg"
+>
+  <a class="navbar-brand" [routerLink]="['/']">E-Learning</a>
+
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link">Score:{{ score || 0 }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/courses/']">Courses</a>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="isAuth()" class="nav-link" [routerLink]="['/mycourses/']"
+          >My courses</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          *ngIf="isAuth()"
+          class="nav-link"
+          [routerLink]="['/myfinishedcourses/']"
+          >Finished courses</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/categories/']">Categories</a>
+      </li>
+      <li *ngIf="isAuth(); else other_content" class="nav-item">
+        <a class="nav-link" (click)="logout()">Logout</a>
+      </li>
+      <ng-template #other_content>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/login/']">Sign in</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/register/']">Sign Up</a>
+        </li>
+      </ng-template>
+    </ul>
+  </div>
+</nav>

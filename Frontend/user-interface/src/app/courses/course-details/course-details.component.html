@@ -1,0 +1,58 @@
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="row mt-5">
+    <div class="col-sm-12 col-md-10">
+      <div class="alert alert-success" role="alert" *ngIf="sucessMessage">
+        {{ sucessMessage }}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <i class="ti-close"></i>
+        </button>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+        {{ errorMessage }}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <i class="ti-close"></i>
+        </button>
+      </div>
+      <div class="card mb-xxl">
+        <img
+          class="card-img-top"
+          src="https://image.flaticon.com/icons/svg/2840/2840152.svg"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h3 class="card-title">{{ course?.name }}</h3>
+          <p class="card-text">
+            {{ course?.description }}
+          </p>
+          <button
+            class="btn btn-raised btn-raised-primary"
+            (click)="RegInCourse()"
+            *ngIf="user"
+          >
+            Register in Course
+          </button>
+
+          <div class="form-group"></div>
+          <div class="card-footer">
+            <span
+              class="badge badge-primary mr-2"
+              *ngFor="let cat of course?.categories"
+              [routerLink]="['/categories/course', cat?._id]"
+              >{{ cat?.name }}</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

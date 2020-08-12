@@ -1,0 +1,60 @@
+<div class="col-md-6 m-auto">
+  <br />
+  <br />
+  <div *ngIf="message" class="alert alert-danger" role="alert">
+    {{ message }}
+  </div>
+  <div class="card card-body mt-5">
+    <h2 class="text-center">Register</h2>
+    <form [formGroup]="registerForm">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" formControlName="name" />
+        <span *ngIf="isInValid('name')" class="text-danger"
+          >Name is required</span
+        >
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="text" class="form-control" formControlName="email" />
+        <span *ngIf="isInValid('name')" class="text-danger">Invalid Email</span>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+        />
+        <span *ngIf="isInValid('password')" class="text-danger">
+          Less than 8 characters</span
+        >
+      </div>
+      <div class="form-group">
+        <label>Confirm password</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password2"
+        />
+        <span *ngIf="isInValid('password2')" class="text-danger">
+          Not Identical password</span
+        >
+      </div>
+
+      <div class="form-group">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="registerForm.invalid"
+          (click)="register()"
+        >
+          Register
+        </button>
+        <button type="submit" class="btn btn-primary" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,142 @@
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mb-md">
+        <p class="text-uppercase font-weight-bold text-small text-muted">
+          Courses
+        </p>
+      </div>
+
+      <div class="col-md-4 col-sm-6 mb-4" *ngFor="let course of courses">
+        <div class="card pricing1">
+          <img
+            class="card-img px-lg mb-md"
+            src="https://image.flaticon.com/icons/svg/2083/2083285.svg"
+            alt=""
+          />
+          <div class="heading">{{ course.name }}</div>
+          <div class="price">{{ course.points }}</div>
+          <small>Points</small>
+
+          <div class="features mb-md">
+            <p>{{ course.description }}</p>
+          </div>
+          <span class="flex-grow-1"></span>
+          <div class="">
+            <button
+              class="btn btn-sm btn-raised btn-raised-primary"
+              [routerLink]="['/courses/', course._id]"
+            >
+              View details
+            </button>
+            <button
+              class="btn btn-sm btn-raised btn-raised-success"
+              *ngIf="course.Reg"
+              (click)="finish(course._id)"
+            >
+              Finish
+            </button>
+            <button
+              *ngIf="course.finish"
+              type="button"
+              class="btn btn-sm btn-success"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Congrats you've finished this course"
+            >
+              <i class="fa fa-check"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav aria-label="navigation" class="mb-xl">
+    <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination pl-1">
+      <li [ngClass]="{ disabled: pager?.currentPage === 1 }" class="page-item">
+        <a
+          [routerLink]="['/courses/']"
+          [queryParams]="{ page: 1 }"
+          class="page-link ml-1"
+          >First</a
+        >
+      </li>
+      <li
+        [ngClass]="{ disabled: pager?.currentPage === 1 }"
+        class="page-item previous-item ml-1"
+      >
+        <a
+          [routerLink]="['/courses/']"
+          [queryParams]="{ page: pager?.currentPage - 1 }"
+          class="page-link"
+          ><p class="ml-2 mt-2">
+            <i class="font-weight-bold ti-angle-left"></i></p
+        ></a>
+      </li>
+      <li
+        *ngFor="let page of pager.pages"
+        [ngClass]="{ active: pager?.currentPage === page }"
+        class="page-item number-item"
+      >
+        <a
+          [routerLink]="['/courses/']"
+          [queryParams]="{ page: page }"
+          class="page-link"
+          ><p class="font-weight-bold ml-2 mt-1">
+            {{ page }}
+          </p></a
+        >
+      </li>
+      <li
+        [ngClass]="{ disabled: pager?.currentPage === pager?.totalPages }"
+        class="page-item next-item"
+      >
+        <a
+          [routerLink]="['/courses/']"
+          [queryParams]="{ page: pager?.currentPage + 1 }"
+          class="page-link"
+          ><p class="ml-2 mt-2">
+            <i class="font-weight-bold ti-angle-right"></i></p
+        ></a>
+      </li>
+      <li
+        [ngClass]="{ disabled: pager?.currentPage === pager?.totalPages }"
+        class="page-item last-item"
+      >
+        <a
+          [routerLink]="['/courses/']"
+          [queryParams]="{ page: pager?.totalPages }"
+          class="page-link"
+          >Last</a
+        >
+      </li>
+    </ul>
+  </nav>
+
+  <!-- <nav aria-label="navigation" class="mb-xl">
+    <ul class="pagination">
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="#"
+          tabindex="-1"
+          aria-disabled="true"
+        >
+          <i class="ti-angle-left"></i>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item active" aria-current="page">
+        <a class="page-link" href="#"
+          >2 <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">
+          <i class="ti-angle-right"></i>
+        </a>
+      </li>
+    </ul>
+  </nav> -->
+</section>

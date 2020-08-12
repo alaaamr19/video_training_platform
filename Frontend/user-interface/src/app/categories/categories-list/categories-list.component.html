@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <h4 class="mt-3">All Categories</h4>
+      <div class="table-responsive">
+        <table id="mytable" class="table table-bordred table-striped">
+          <thead>
+            <th>Name</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cat of categories">
+              <td>
+                <button
+                  class="btn btn-link btn-link-info"
+                  [routerLink]="['/categories/course/', cat._id]"
+                >
+                  {{ cat.name }}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal -->
