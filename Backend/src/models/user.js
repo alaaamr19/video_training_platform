@@ -62,7 +62,7 @@ userSchema.methods.generateJWTtoken = async function () {
   const user = this;
   const token = jwt.sign({ _id: user.id.toString() }, "videoTraining");
   user.tokens = user.tokens.concat({ token });
-  // console.log(user);
+
   await user.save();
   return token;
 };

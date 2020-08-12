@@ -23,7 +23,6 @@ router.post("/users", async (req, res) => {
     const token = await user.generateJWTtoken();
     res.json({ user: user.filterUserData(), token: token });
   } catch (error) {
-    console.log("alaa");
     res.json(400, error);
   }
 });
@@ -58,7 +57,7 @@ router.post("/users/login", async (req, res) => {
       req.body.password
     );
     const token = await user.generateJWTtoken();
-    console.log(user);
+
     res.json({ user: user.filterUserData(), token: token });
   } catch (error) {
     res.status(400).json({ error: error.toString() });
@@ -74,7 +73,6 @@ router.get("/users/logout", auth, async (req, res) => {
     await req.user.save();
     res.send();
   } catch (error) {
-    console.log("lolo");
     res.status(500).send("internal server error!");
   }
 });
@@ -125,13 +123,13 @@ router.patch("/users/course", auth, async (req, res) => {
     res.status(400).send("Invalid Updates");
   }
   const user = req.user;
-  console.log("nany", user.courses);
+
   if (user.courses.includes(req.body.courses)) {
     res.status(400).json({ message: "You already registered in tha course!" });
   } else {
     try {
       user["courses"] = [...user["courses"], req.body["courses"]];
-      console.log("lawlaw", user);
+
       await user.save();
       // await user.setScore(req.body.finishedCourses);
       if (!user) {
@@ -153,7 +151,7 @@ router.patch("/users/finishCourse", auth, async (req, res) => {
     res.status(400).send("Invalid Updates");
   }
   const user = req.user;
-  console.log("nany", user.courses);
+
   if (user.courses.includes(req.body.courses)) {
     res.status(400).json({ message: "You already registered in tha course!" });
   } else {
@@ -162,7 +160,7 @@ router.patch("/users/finishCourse", auth, async (req, res) => {
         ...user["finishedCourses"],
         req.body["finishedCourses"],
       ];
-      console.log("lawlaw", user);
+
       await user.save();
       await user.setScore(req.body.finishedCourses);
       if (!user) {

@@ -18,7 +18,6 @@ const user = async (req, res, next) => {
     req.token = tokenObj.token;
     next();
   } catch (error) {
-    console.log("alaaa", error);
     res.status(403).send("Not Authenticated");
   }
 };

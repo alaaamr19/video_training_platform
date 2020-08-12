@@ -12,7 +12,6 @@ router.post("/categories", admin, async (req, res) => {
     await category.save();
     res.status(201).send(category);
   } catch (error) {
-    console.log(error);
     res.status(400).send(error);
   }
 });
@@ -28,6 +27,20 @@ router.get("/categories", async (req, res) => {
   }
 });
 
+router.get("/cats/:id", async (req, res) => {
+  const _id = req.params.id;
+  try {
+    const category = await Category.findById(_id);
+
+    if (!category) {
+      res.status(404).send();
+    }
+
+    res.json(category);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 // Get certain category's courses (all)
 router.get("/categories/:id", async (req, res) => {
   const _id = req.params.id;
@@ -42,7 +55,6 @@ router.get("/categories/:id", async (req, res) => {
 
     res.json(courses);
   } catch (error) {
-    console.log(error);
     res.status(500).send(error);
   }
 });
@@ -50,25 +62,19 @@ router.get("/categories/:id", async (req, res) => {
 // Edit certain category (admin only)
 router.patch("/categories/:id", admin, async (req, res) => {
   const _id = req.params.id;
-  const updates = Object.keys(req.body);
-  const validUpdates = ["name", "courses"];
-
-  const isValid = updates.every((key) => validUpdates.includes(key));
-  if (!isValid) {
-    res.status(400).send("Invalid Updates");
-  }
 
   try {
-    const categories = await Category.findByIdAndUpdate(_id, req.body, {
+    let category = await Category.updateOne({ _id: _id }, req.body, {
       new: true,
       runValidators: true,
     });
-    if (!categories) {
-      res.status(404).send();
+    if (!category) {
+      res.status(400).send();
     }
-    res.send(user);
+
+    res.json(category);
   } catch (error) {
-    req.status(400).send(error);
+    res.send(400, error);
   }
 });
 

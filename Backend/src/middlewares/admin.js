@@ -4,8 +4,6 @@ const getToken = require("../config/jwtConfig");
 const admin = async (req, res, next) => {
   try {
     const tokenObj = getToken(req);
-    // console.log(tokenObj);
-    // console.log(decodedToken);
     const user = await User.findOne({
       _id: tokenObj.decodedtoken._id,
       "tokens.token": tokenObj.token,
@@ -18,7 +16,6 @@ const admin = async (req, res, next) => {
     req.token = tokenObj.token;
     next();
   } catch (error) {
-    console.log("alaaa", error);
     res.status(403).send("Not Authenticated");
   }
 };

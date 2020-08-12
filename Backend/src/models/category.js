@@ -18,9 +18,9 @@ const CatShema = mongoose.Schema({
 // Instance method to add course to category
 CatShema.methods.addCourse = async function (course) {
   const category = this;
-  console.log("before");
+
   category.courses = [...category.courses, course];
-  console.log("after", category);
+
   await category.save();
   return category;
 };

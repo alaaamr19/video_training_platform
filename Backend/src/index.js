@@ -25,7 +25,7 @@ app.listen(port, () => {
 
 const addSuperUser = async () => {
   const user = await User.findOne({ email: "admin@admin.com" });
-  // console.log(user);
+
   if (!user) {
     const admin = new User({
       name: "admin",
@@ -36,9 +36,7 @@ const addSuperUser = async () => {
     try {
       await admin.save();
       await admin.generateJWTtoken();
-    } catch (error) {
-      console.log("error", error);
-    }
+    } catch (error) {}
   }
 };
 
