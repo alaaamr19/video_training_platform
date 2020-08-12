@@ -6,6 +6,7 @@
         <table id="mytable" class="table table-bordred table-striped">
           <thead>
             <th>Name</th>
+            <th>Edit</th>
             <th>Delete</th>
           </thead>
           <tbody>
@@ -18,7 +19,16 @@
                   {{ cat.name }}
                 </button>
               </td>
-
+              <td>
+                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                  <button
+                    class="btn btn-primary btn-xs"
+                    [routerLink]="['/categories/update/', cat._id]"
+                  >
+                    <span class="fa fa-pencil"></span>
+                  </button>
+                </p>
+              </td>
               <td>
                 <p data-placement="top" data-toggle="tooltip" title="Delete">
                   <button

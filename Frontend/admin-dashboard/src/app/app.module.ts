@@ -25,6 +25,7 @@ import { HeaderComponent } from './header/header.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
 import { ListCategoriesComponent } from './categoriess/list/list.component';
 import { DetailsComponent } from './courses/details/details.component';
+import { UpdateCategoryComponent } from './categoriess/update/update.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { DetailsComponent } from './courses/details/details.component';
     UsersListComponent,
     ListCategoriesComponent,
     DetailsComponent,
+    UpdateCategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +66,5 @@ import { DetailsComponent } from './courses/details/details.component';
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AddCategoryComponent],
 })
 export class AppModule {}

@@ -31,7 +31,6 @@ export class ListCategoriesComponent implements OnInit {
     });
   }
   delete(catId: any) {
-    console.log(catId);
     this.catService.delete(catId).subscribe((data) => {
       this.categories = this.categories.filter(function (el) {
         return el._id != catId;

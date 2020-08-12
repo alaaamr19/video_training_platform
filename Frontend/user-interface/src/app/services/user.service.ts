@@ -13,7 +13,6 @@ export class UserService {
 
   getUser() {
     const userData = localStorage.getItem('user');
-    console.log(JSON.parse(userData));
 
     return JSON.parse(userData)?.user;
   }
@@ -39,7 +38,6 @@ export class UserService {
       // Get server side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
 

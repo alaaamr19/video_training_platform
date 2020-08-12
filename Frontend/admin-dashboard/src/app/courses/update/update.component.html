@@ -33,21 +33,7 @@
           required
         />
       </div>
-      <div class="form-group">
-        <label>Select categories</label>
-        <br />
-        <select
-          class="selectpicker"
-          data-selected-text-format="count"
-          data-style="btn-raised-default"
-          multiple
-          [(ngModel)]="course.categories"
-        >
-          <option *ngFor="let category of categories" [value]="category">
-            {{ category.name }}</option
-          >
-        </select>
-      </div>
+
       <div class="btn-toolbar">
         <button class="btn btn-primary m-1" (click)="Update()">
           Update

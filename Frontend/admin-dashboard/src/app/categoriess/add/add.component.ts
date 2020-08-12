@@ -24,7 +24,6 @@ export class AddCategoryComponent implements OnInit {
 
   save() {
     if (!this.isInValid()) {
-      console.log(this.category);
       this.categoryService.create(this.category).subscribe((data) => {
         this.router.navigate(['../list'], { relativeTo: this.activateRoute });
       });

@@ -28,7 +28,6 @@ export class AdminService {
   }
 
   disable(id) {
-    console.log(id);
     return this.httpClient
       .delete(this.baseUrl + '/users/' + id)
       .pipe(catchError(this.errorHandler));
@@ -43,7 +42,7 @@ export class AdminService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
+
     return throwError(errorMessage);
   }
 }

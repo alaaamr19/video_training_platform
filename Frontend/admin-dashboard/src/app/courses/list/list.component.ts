@@ -22,13 +22,8 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit() {
     if (this.route.toString().includes('categories/')) {
-      console.log('alaa');
-
       this.route.paramMap.subscribe((params) => {
-        console.log(params);
-
         const id = params.get('catId');
-        console.log(id);
 
         this.getByCat(id);
       });
@@ -37,7 +32,6 @@ export class CourseListComponent implements OnInit {
     }
   }
   delete(courseId: any) {
-    console.log(courseId);
     this.courseService.delete(courseId).subscribe((data) => {
       this.courses = this.courses.filter(function (el) {
         return el._id != courseId;
@@ -47,19 +41,13 @@ export class CourseListComponent implements OnInit {
 
   loadPage(page) {
     this.courseService.getByPage(page).subscribe((data) => {
-      console.log(data);
       this.pager = data['pager'];
       this.courses = data['coursesPage'];
-      // (data: Course[]) => {
-      // console.log(data);
-      // this.courses = data;
-      console.log(this.courses);
     });
   }
 
   getByCat(catId) {
-    this.categoryService.getById(catId).subscribe((data) => {
-      console.log(data);
+    this.categoryService.getCatCourses(catId).subscribe((data) => {
       this.courses = data;
       console.log(this.courses);
     });

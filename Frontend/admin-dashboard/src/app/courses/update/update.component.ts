@@ -28,11 +28,10 @@ export class UpdateComponent implements OnInit {
   ) {}
 
   cancel() {
-    this.router.navigate(['../list'], { relativeTo: this.activatedRoute });
+    this.router.navigate(['/courses/list']);
   }
 
   ngOnInit(): void {
-    this.getAllCategories();
     this.activatedRoute.paramMap.subscribe((params) => {
       const id = params.get('courseId');
       if (id) {
@@ -42,32 +41,15 @@ export class UpdateComponent implements OnInit {
       }
     });
   }
-  getAllCategories() {
-    this.categoryService.getAll().subscribe((data) => {
-      this.categories = data;
-      console.log(this.categories);
-    });
-  }
 
-  isSelected(category) {
-    this.categories.forEach((element) => {
-      if (category == element) {
-        return true;
-      }
-    });
-  }
   Update() {
     if (!this.course.points) {
       this.requirePoints = 'This feild is required';
     } else if (!this.course.name) {
       this.requireName = 'This feild is required';
     } else {
-      console.log(this.course);
-
       this.courseService.update(this.course._id, this.course).subscribe(
         (data) => {
-          console.log('alaa', data);
-
           this.router.navigate(['../../list'], {
             relativeTo: this.activatedRoute,
           });
@@ -77,7 +59,5 @@ export class UpdateComponent implements OnInit {
         }
       );
     }
-
-    console.log(this.course);
   }
 }

@@ -28,18 +28,13 @@ export class AuthService {
             observe: 'body',
           }
         )
-        .subscribe(
-          (response: any) => {
-            if (response.token) {
-              this.setToken(response);
-              this.isLogined = true;
-              this.roter.navigate(['']);
-            }
-          },
-          (error) => {
-            console.log(error);
+        .subscribe((response: any) => {
+          if (response.token) {
+            this.setToken(response);
+            this.isLogined = true;
+            this.roter.navigate(['']);
           }
-        );
+        });
     }
   }
   setToken(data: any) {

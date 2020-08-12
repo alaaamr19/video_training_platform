@@ -24,7 +24,6 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit() {
     let activateRoute = this.route.toString();
-    console.log(activateRoute);
 
     if (activateRoute.includes('categories/')) {
       this.route.paramMap.subscribe((params) => {
@@ -42,19 +41,14 @@ export class CourseListComponent implements OnInit {
 
   loadPage(page) {
     this.courseService.getByPage(page).subscribe((data) => {
-      console.log(data);
       this.pager = data['pager'];
       this.courses = data['coursesPage'];
-
-      console.log(this.courses);
     });
   }
 
   getByCat(catId) {
     this.categoryService.getById(catId).subscribe((data) => {
-      console.log(data);
       this.courses = data;
-      console.log(this.courses);
     });
   }
   getUserCourses() {
@@ -63,7 +57,6 @@ export class CourseListComponent implements OnInit {
       this.courses.forEach((course) => {
         course['Reg'] = true;
       });
-      console.log('mycourse', this.courses);
     });
   }
   getFinishedCourses() {
@@ -76,8 +69,6 @@ export class CourseListComponent implements OnInit {
   }
 
   finish(courseId) {
-    this.userService.finishCourse(courseId).subscribe((data) => {
-      console.log(data);
-    });
+    this.userService.finishCourse(courseId).subscribe((data) => {});
   }
 }

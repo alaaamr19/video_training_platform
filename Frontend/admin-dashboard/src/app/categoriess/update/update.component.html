@@ -1,1 +1,30 @@
-<p>update works!</p>
+<div class="col-md-6 m-auto">
+  <br />
+  <br />
+  <div *ngIf="message" class="alert alert-danger" role="alert">
+    {{ message }}
+  </div>
+  <div class="card card-body mt-5">
+    <h2 class="text-center">Edit Category</h2>
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label>Name</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="category.name"
+          required
+        />
+
+        <div class="btn-toolbar">
+          <button class="btn btn-primary m-1" (click)="Update()">
+            Update
+          </button>
+          <button class="btn btn-primary m-1" (click)="cancel()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

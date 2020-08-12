@@ -18,7 +18,6 @@ export class ListComponent implements OnInit {
     });
   }
   disable(userId: any) {
-    console.log(userId);
     this.adminService.disable(userId).subscribe((data) => {
       this.users = this.users.filter(function (el) {
         return el._id != userId;

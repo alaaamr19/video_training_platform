@@ -44,13 +44,11 @@ export class DetailsComponent implements OnInit {
         cat.checked = false;
         return cat;
       });
-      console.log(this.newCats);
     });
   }
 
   isSelected(category) {
     let currentCats = this.course.categories;
-    console.log('lolo', currentCats);
 
     for (let i = 0; i < currentCats?.length; i++) {
       if (category._id == currentCats[i]._id) {
@@ -63,7 +61,6 @@ export class DetailsComponent implements OnInit {
     return this.newCats
       .filter((opt) => opt.checked)
       .map((ele) => {
-        console.log(ele);
         delete ele.checked;
         return ele;
       });

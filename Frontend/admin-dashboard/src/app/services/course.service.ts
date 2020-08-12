@@ -11,8 +11,6 @@ export class CourseService {
   baseUrl = 'http://localhost:3000';
   constructor(private httpClient: HttpClient) {}
   create(course: Course) {
-    console.log(course);
-
     return this.httpClient
       .post(this.baseUrl + '/courses/', course, {
         observe: 'body',
@@ -38,15 +36,12 @@ export class CourseService {
   }
 
   update(id, course) {
-    console.log('toto', course);
-
     return this.httpClient
       .put(this.baseUrl + '/courses/' + id, course)
       .pipe(catchError(this.errorHandler));
   }
 
   delete(id) {
-    console.log(id);
     return this.httpClient
       .delete(this.baseUrl + '/courses/' + id)
       .pipe(catchError(this.errorHandler));
@@ -54,13 +49,12 @@ export class CourseService {
   errorHandler(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
-      // Get client-side error
+      // Get clientside error
       errorMessage = error.error.message;
     } else {
-      // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
+
     return throwError(errorMessage);
   }
 }

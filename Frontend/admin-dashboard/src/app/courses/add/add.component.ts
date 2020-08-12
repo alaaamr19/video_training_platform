@@ -38,14 +38,12 @@ export class AddCourseComponent implements OnInit {
         cat.checked = false;
         return cat;
       });
-      console.log(this.newCats);
     });
   }
   getSelectedOptions() {
     return this.newCats
       .filter((opt) => opt.checked)
       .map((ele) => {
-        console.log(ele);
         delete ele.checked;
         return ele;
       });
@@ -55,12 +53,11 @@ export class AddCourseComponent implements OnInit {
     let data = this.addCourseForm.value;
     let selectedOp = this.getSelectedOptions();
     data['categories'] = selectedOp;
-    console.log('alaa', data);
 
     if (!this.addCourseForm.invalid) {
       this.courseService.create(data).subscribe(
         (data) => {
-          this.router.navigate(['courses/list']);
+          this.router.navigate(['/courses/list']);
         },
         (error) => (this.message = 'Something went wrong')
       );
@@ -68,9 +65,7 @@ export class AddCourseComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['../courses/list'], {
-      relativeTo: this.activatedRouter,
-    });
+    this.router.navigate(['/courses/list']);
   }
   ngOnInit(): void {
     this.getAllCategories();

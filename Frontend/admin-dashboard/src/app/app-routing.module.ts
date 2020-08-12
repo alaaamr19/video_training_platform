@@ -12,6 +12,7 @@ import { ListCategoriesComponent } from './categoriess/list/list.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { DetailsComponent } from './courses/details/details.component';
+import { UpdateCategoryComponent } from './categoriess/update/update.component';
 
 const routes: Routes = [
   { path: 'courses', redirectTo: 'courses/list', pathMatch: 'full' },
@@ -32,6 +33,12 @@ const routes: Routes = [
     component: UpdateComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'categories/update/:catId',
+    component: UpdateCategoryComponent,
+    canActivate: [AuthGuard],
+  },
+
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'users/list', component: ListComponent, canActivate: [AuthGuard] },

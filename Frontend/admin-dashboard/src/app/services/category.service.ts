@@ -21,6 +21,11 @@ export class CategoryService {
   }
   getById(id): Observable<any> {
     return this.httpClient
+      .get(this.baseUrl + '/cats/' + id)
+      .pipe(catchError(this.errorHandler));
+  }
+  getCatCourses(id): Observable<any> {
+    return this.httpClient
       .get(this.baseUrl + '/categories/' + id)
       .pipe(catchError(this.errorHandler));
   }
@@ -33,7 +38,7 @@ export class CategoryService {
 
   update(id, category) {
     return this.httpClient
-      .patch(this.baseUrl + '/categories/' + id, JSON.stringify(category))
+      .patch(this.baseUrl + '/categories/' + id, { name: category.name })
       .pipe(catchError(this.errorHandler));
   }
 
@@ -51,7 +56,6 @@ export class CategoryService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
 }
