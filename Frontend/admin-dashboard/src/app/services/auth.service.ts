@@ -59,7 +59,7 @@ export class AuthService {
 
   getUser() {
     const userData = localStorage.getItem('user');
-    return JSON.parse(userData)?.user;
+    return JSON.parse(userData)?.user.name;
   }
 
   logout() {

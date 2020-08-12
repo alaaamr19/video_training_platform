@@ -6,20 +6,6 @@
 @import "./assets/vendor/bootstrap-select/css/bootstrap-select.min.css";
 @import "./assets/vendor/bootstrap-slider/css/bootstrap-slider.min.css";
 @import "./assets/styles/css/done/done.min.css";
-/* <link rel="stylesheet" href="./assets/fonts/themify-icons.css" />
-    <link
-      rel="stylesheet"
-      href="./assets/vendor/bootstrap/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="./assets/vendor/bootstrap-select/css/bootstrap-select.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="./assets/vendor/bootstrap-slider/css/bootstrap-slider.min.css"
-    />
-    <link rel="stylesheet" href="./assets/styles/css/done/done.min.css" /> */
 html,
 body {
   height: 100%;
