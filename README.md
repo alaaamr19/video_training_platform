@@ -23,4 +23,5 @@ E-learning website that implemented with  **Angular 9 & Node.js**
  navigate to directory you want and run `npm install` then `ng serve`.
  - At the first time to run the project login as an admin with credentials (email: admin@admin.com,password: admin1234)
  
-
+## Live Demo
+- [Admin](https://drive.google.com/file/d/19rXtFNyPG_tUmcxM-3omahl-pj_Rthzs/view?fbclid=IwAR0-LrgW7E7qCd2cWG0MSIJLZnpjdfkQ3BOVrOmVrNsuFqTNbXu9Pjz47sE)
